@@ -54,4 +54,20 @@ public class AlphabetResourceTest {
 					.assertThat().body("lowerCase", equalTo("a"))
 					.assertThat().body("upperCase", equalTo("A"));
 	}
+
+	@Test
+	public void shouldValidateParameter() {
+		RestAssured.given(this.spec)
+				.accept("application/json")
+				.filter(document("alphabet"))
+				.given().param("pos", -1)
+				.when().get("/alphabet/charAt")
+				.then()
+					.assertThat().contentType(ContentType.JSON)
+					.assertThat().statusCode(is(400))
+					.assertThat().body("field", equalTo("a"))
+					.assertThat().body("message", equalTo("a"))
+					.assertThat().body("code", equalTo("A"));
+
+	}
 }
