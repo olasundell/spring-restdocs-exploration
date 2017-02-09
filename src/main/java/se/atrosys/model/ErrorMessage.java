@@ -7,10 +7,11 @@ import lombok.Data;
 /**
  * TODO write documentation
  */
-@Data
 @Builder
+@Data
 @AllArgsConstructor
-public class CharAt {
-	private char lowerCase;
-	private char upperCase;
+public class ErrorMessage {
+	private String field;
+	private String code;
+	private String message;
 }

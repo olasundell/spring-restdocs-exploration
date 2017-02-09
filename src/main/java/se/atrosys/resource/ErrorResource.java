@@ -2,19 +2,15 @@ package se.atrosys.resource;
 
 import javaslang.collection.List;
 import javaslang.collection.Stream;
-import lombok.Builder;
-import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import se.atrosys.model.ErrorMessage;
 
-import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * TODO write documentation
@@ -34,11 +30,4 @@ public class ErrorResource {
 				.toList();
 	}
 
-	@Builder
-	@Data
-	public static class ErrorMessage {
-		private String field;
-		private String code;
-		private String message;
-	}
 }

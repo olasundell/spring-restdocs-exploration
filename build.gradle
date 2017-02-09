@@ -1,9 +1,13 @@
 buildscript {
 	ext {
-		springBootVersion = '1.5.1.RELEASE'
+//		springBootVersion = '1.5.1.RELEASE'
+		springBootVersion = '2.0.0.BUILD-SNAPSHOT'
 	}
 	repositories {
 		mavenCentral()
+		jcenter()
+		maven { url 'http://repo.spring.io/snapshot' }
+		maven { url 'http://repo.spring.io/milestone' }
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -27,6 +31,9 @@ sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+    jcenter()
+	maven { url 'http://repo.spring.io/snapshot' }
+	maven { url 'http://repo.spring.io/milestone' }
 }
 ext {
 	snippetsDir = file('build/generated-snippets')
@@ -65,7 +72,14 @@ dependencies {
 	compile "io.javaslang:javaslang:2.0.5"
 	compile("io.javaslang:javaslang-jackson:2.0.5")
 
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('org.springframework.boot:spring-boot-starter-test') {
+		exclude module: 'junit'
+	}
+	// https://mvnrepository.com/artifact/org.junit/junit5-api
+//	testCompile group: 'org.junit', name: 'junit5-api', version: '5.0.0-ALPHA'
+	// https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+	compile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.0.0-M3'
+
 	testCompile('org.springframework.restdocs:spring-restdocs-restassured')
 //	testCompile(group: 'io.rest-assured', name: 'rest-assured', version: '3.0.2')
 //	testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc:1.1.2.RELEASE'
